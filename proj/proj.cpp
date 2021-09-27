@@ -6,6 +6,6 @@ int main()
     std::cout << "Hello World!\n";
     Class a;
     a.a = 2;
-    a.sum();
+    a.doublesum();
 }
 
