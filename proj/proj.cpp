@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    //task 6
+    std::cout << "Hello World!\n";
     Faculty faculty1, faculty2, faculty3, faculty4, faculty5;
     Faculty* dynamicFaculty1 = new Faculty();
     Faculty* dynamicFaculty2 = new Faculty();
