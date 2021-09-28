@@ -15,7 +15,8 @@ public:
 	void setNumericData(int _numOfCathedras, int _numOfSpecs);
 	void setInfo(string _decane, int _yearOfCreating, string _telephoneNumber, string _email);
 	void modifyData(Faculty* faculty);
-	Faculty* returnWithModifiedData(Faculty* faculty);
+	
+	Faculty returnWithModifiedData();
 	static Faculty readFromFile() {
 		Faculty obj;
 		ifstream in("facfile.txt", ios::in);
@@ -26,7 +27,8 @@ public:
 		in >> obj.numOfCathedras;
 		in >> obj.numOfSpecs;
 		in >> obj.telephoneNumber;
-		in >> obj.yearOfCreating;	
+		in >> obj.yearOfCreating;		
+		in.close();
 		return obj;
 	}
 	void printToFile();

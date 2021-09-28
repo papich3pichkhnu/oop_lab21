@@ -11,7 +11,7 @@ void Faculty::setInfo(string _decane, int _yearOfCreating, string _telephoneNumb
 	this->email = _email;
 }
 void Faculty::modifyData(Faculty* faculty) { faculty->abbreviature += "_New"; }
-Faculty* Faculty::returnWithModifiedData(Faculty* faculty) { faculty->abbreviature += "New"; return faculty; }
+Faculty Faculty::returnWithModifiedData() { this->abbreviature += "New"; return *this; }
 void Faculty::printToFile() {
 	ofstream out("facfile.txt", ios::out);
 	out << this->abbreviature << endl;
@@ -22,15 +22,17 @@ void Faculty::printToFile() {
 	out << this->numOfSpecs << endl;
 	out << this->telephoneNumber << endl;
 	out << this->yearOfCreating << endl;
+	out.close();
 }
 void Faculty::show() {
 	
-	cout << "Abbreviature:"; cout << this->abbreviature << endl;
-	cout << "Decane:";cout << this->decane << endl;
-	cout << "Email:";cout << this->email << endl;
-	cout << "Faculty name:";cout << this->facultyName << endl;
-	cout << "Num of cathedras:";cout << this->numOfCathedras << endl;
-	cout << "Num of majors:";cout << this->numOfSpecs << endl;
-	cout << "Telephone number:";cout << this->telephoneNumber << endl;
-	cout << "Year of creating:";cout << this->yearOfCreating << endl;
+	cout << "Abbreviature: "; cout << this->abbreviature << endl;
+	cout << "Decane: ";cout << this->decane << endl;
+	cout << "Email: ";cout << this->email << endl;
+	cout << "Faculty name: ";cout << this->facultyName << endl;
+	cout << "Num of cathedras: ";cout << this->numOfCathedras << endl;
+	cout << "Num of majors: ";cout << this->numOfSpecs << endl;
+	cout << "Telephone number: ";cout << this->telephoneNumber << endl;
+	cout << "Year of creating: ";cout << this->yearOfCreating << endl;
+	cout << endl;
 }
