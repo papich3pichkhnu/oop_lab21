@@ -33,6 +33,7 @@ void Student::show()
 	cout << "Height: "; cout << this->height << " cm" << endl;
 	cout << "Color of eyes: ";  cout << this->colorOfEyes << endl;
 	cout << "Color of hair: "; cout << this->colorOfHair << endl;
+	cout << "Faculty of the student: "<<endl; this->showFaculty();
 	cout << endl;
 }
 void Student::showFaculty() {
@@ -40,4 +41,5 @@ void Student::showFaculty() {
 	{
 		this->sFaculty->show();
 	}
+	else cout << "None";
 }

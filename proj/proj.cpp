@@ -80,14 +80,16 @@ int main()
     //task 10
 
     cout << "Basic student and faculty interaction scenario" << endl;
-    char n = (char)(int('0') + i + 1);
-    string sn = ""; sn += n;
-    arrayFaculties[i].setFaculty("faculty" + sn, "FC" + sn);
-    arrayFaculties[i].setInfo("decane" + sn, rand() % 20 + 2000, "123456789", "fac" + sn + "@gmail.com");
-    arrayFaculties[i].setNumericData(rand() % 5 + 10, rand() % 5 + 10);
-    arrayFaculties[i].modifyData(&arrayFaculties[i]);
-    arrayFaculties[i] = arrayFaculties[i].returnWithModifiedData();
-    cout << "Faculty " << i + 1 << ":" << endl;
-    arrayFaculties[i].show();
+    Faculty fit;
+    fit.setFaculty("Faculty of information tchnologies", "FIT");
+    fit.setInfo("Savenko_O.S.", 2012, "(0382)67-19-43", "savenko_oleg_st@ukr.net");
+    fit.setNumericData(6, 8);
+    
+    Student stud;
+    stud.setName("Volodymyr", "Avsiievych", "Ruslanovych");
+    stud.setEyesHair("blue", "brown");
+    stud.setData(18, 174);
+    stud.setFaculty(&fit);
+    stud.show();
 
 }
