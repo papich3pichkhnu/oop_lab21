@@ -14,8 +14,8 @@ public:
 	void setNumericData(int _numOfCathedras);
 	void setNumericData(int _numOfCathedras, int _numOfSpecs);
 	void setInfo(string _decane, int _yearOfCreating, string _telephoneNumber, string _email);
-	void modifyData(Faculty* faculty);
-	
+	int getNumOfCathedras();
+	void modifyData(Faculty* faculty);	
 	Faculty returnWithModifiedData();
 	static Faculty readFromFile() {
 		Faculty obj;
@@ -30,9 +30,15 @@ public:
 		in >> obj.yearOfCreating;		
 		in.close();
 		return obj;
-	}
+	}	
 	void printToFile();
 	void show();
+	static int* myAlloc()
+	{
+		int r = rand() % 4 + 2;
+		int* arr{ new int[r] {0} };
+		return arr;
+	}
 private:
 	int yearOfCreating;
 	int numOfCathedras;

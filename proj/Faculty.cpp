@@ -10,6 +10,9 @@ void Faculty::setInfo(string _decane, int _yearOfCreating, string _telephoneNumb
 	this->decane = _decane; this->yearOfCreating = _yearOfCreating; this->telephoneNumber = _telephoneNumber;
 	this->email = _email;
 }
+int Faculty::getNumOfCathedras() {
+	return this->numOfCathedras;
+}
 void Faculty::modifyData(Faculty* faculty) { faculty->abbreviature += "_New"; }
 Faculty Faculty::returnWithModifiedData() { this->abbreviature += "New"; return *this; }
 void Faculty::printToFile() {

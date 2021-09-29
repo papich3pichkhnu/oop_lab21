@@ -91,5 +91,38 @@ int main()
     stud.setData(18, 174);
     stud.setFaculty(&fit);
     stud.show();
+    cout << endl;
 
+    //task 11
+
+    cout << "/********************/" << endl;
+
+    Faculty* pfit=&fit;
+    pfit->show();
+
+    cout << "/********************/" << endl;
+
+    //task 12
+
+    int* array = Faculty::myAlloc();
+    int cnt = 0;
+    while (array[cnt] == 0)cnt++;
+    cout << "Array of numbers of cathedras:" << endl;
+    for (int i = 0; i < cnt; i++)
+    {
+        array[i] = arrayFaculties[i].getNumOfCathedras();
+        cout << array[i] << " ";
+    }
+    for (int i = 0; i < cnt; i++)
+    {
+        for (int j = i + 1; j < cnt; j++)
+        {
+            if (array[j] < array[i])swap(array[j], array[i]);
+        }
+    }
+    cout << endl << "Sorted array of numbers of cathedras:" << endl;
+    for (int i = 0; i < cnt; i++)
+    {       
+        cout << array[i] << " ";
+    }
 }
