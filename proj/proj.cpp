@@ -7,6 +7,13 @@ int main()
 {
     srand(time(NULL));
 
+    /*
+    Описати клас Викладач, який викладає якісь дисципліни на якомусь факультеті для якихось студентів. 
+    */
+#pragma region  
+
+
+
     //task 6
 
     Faculty faculty1, faculty2, faculty3, faculty4, faculty5;
@@ -125,4 +132,7 @@ int main()
     {       
         cout << array[i] << " ";
     }
+#pragma endregion
+
+
 }
