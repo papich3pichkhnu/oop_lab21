@@ -39,3 +39,76 @@ void Faculty::show() {
 	cout << "Year of creating: ";cout << this->yearOfCreating << endl;
 	cout << endl;
 }
+Faculty Faculty::readFromFile() {
+	Faculty obj;
+	ifstream in("facfile.txt", ios::in);
+	in >> obj.abbreviature;
+	in >> obj.decane;
+	in >> obj.email;
+	in >> obj.facultyName;
+	in >> obj.numOfCathedras;
+	in >> obj.numOfSpecs;
+	in >> obj.telephoneNumber;
+	in >> obj.yearOfCreating;
+	in.close();
+	return obj;
+}
+int* Faculty::myAlloc()
+{
+	int r = rand() % 4 + 2;
+	int* arr{ new int[r] {0} };
+	return arr;
+}
+void Faculty::enrollStudent(Student* s)
+{
+	this->students.push_back(s);
+	s->setFaculty(this);
+	cout << "Student " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was enroled on the faculty " << this->abbreviature<<endl;
+
+}
+void Faculty::deductStudent(Student* s)
+{
+	bool f = false;
+	for (auto it=this->students.begin();it!=this->students.end();it++)
+	{
+		if (s->getFirstName() == (*it)->getFirstName() && s->getName() == (*it)->getName() && s->getLastName() == (*it)->getLastName())
+		{
+			this->students.erase(it);
+			cout << "Student " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was deducted from the faculty " << this->abbreviature << endl;
+			f = true;
+			s->setFaculty(NULL);
+			break;
+		}
+	}
+	if (!f)
+	{
+		cout << "Student " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " isn't studiyng on this faculty " << this->abbreviature << endl;
+	}
+}
+void Faculty::enrollLecturer(Lecturer* s)
+{
+	this->lecturers.push_back(s);
+	s->setFaculty(this);
+	cout << "Lecturer " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was enroled on the faculty " << this->abbreviature << endl;
+
+}
+void Faculty::deductLecturer(Lecturer* s)
+{
+	bool f = false;
+	for (auto it = this->lecturers.begin(); it != this->lecturers.end(); it++)
+	{
+		if (s->getFirstName() == (*it)->getFirstName() && s->getName() == (*it)->getName() && s->getLastName() == (*it)->getLastName())
+		{
+			this->lecturers.erase(it);
+			cout << "Lecturer " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was deducted from the faculty " << this->abbreviature << endl;
+			f = true;
+			s->setFaculty(NULL);
+			break;
+		}
+	}
+	if (!f)
+	{
+		cout << "Lecturer " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " isn't teaching on this faculty " << this->abbreviature << endl;
+	}
+}
+vector<Student*> Faculty::getStudents() { return this->students; }
