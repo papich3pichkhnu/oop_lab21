@@ -16,7 +16,7 @@ void Lecturer::teaching()
 {
 	srand(time(NULL));
 	vector<Student*> students=this->f->getStudents();
-	int cnt = this->disciplines.size();
+	int cnt = this->disciplines.size();	
 	int r = rand() % cnt;
 	cout << "/*************/" << endl;
 	cout << "Teaching discipline " << this->disciplines[r]->getName() << "...." << endl;
