@@ -6,6 +6,12 @@
 using namespace std;
 class Student
 {
+private:
+	int age;
+	int height;
+	string colorOfEyes;
+	string colorOfHair;
+	Faculty* sFaculty;
 public:
 	string firstName;
 	string name;
@@ -50,11 +56,6 @@ public:
 	void printToFile();
 	void show();
 	void showFaculty();
-private:
-	int age;
-	int height;
-	string colorOfEyes;
-	string colorOfHair;
-	Faculty* sFaculty;
+
 };
 

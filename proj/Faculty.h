@@ -5,6 +5,12 @@
 using namespace std;
 class Faculty
 {
+private:
+	int yearOfCreating;
+	int numOfCathedras;
+	int numOfSpecs;
+	string telephoneNumber;
+	string email;
 public:
 	string facultyName;
 	string abbreviature;
@@ -39,11 +45,6 @@ public:
 		int* arr{ new int[r] {0} };
 		return arr;
 	}
-private:
-	int yearOfCreating;
-	int numOfCathedras;
-	int numOfSpecs;
-	string telephoneNumber;
-	string email;
+
 };
 
