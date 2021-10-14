@@ -12,19 +12,25 @@ class Student;
 class Lecturer
 {
 private:
-	vector<Discipline*> disciplines;
-	string firstName;
-	string name;
-	string lastName;
+	vector<Discipline*> disciplines;	
 	Faculty* f;	
 public:
-	void setName(string _name);
-	void setName(string _name, string _firstName, string _lastName);
+	string lastName;
+	string firstName;
+	string middleName;
+	void setName(string _lName);
+	void setName(string _lName, string _fName, string _mName);
 	void setFaculty(Faculty* f);
+	Lecturer();
+	~Lecturer();
+	Lecturer(string _lName, string _fName, string _mName);
 	string getFirstName();
-	string getName();
+	string getMiddleName();
 	string getLastName();
+	string getFullName();
 	void teaching();
 	void addDiscipline(Discipline* d);
+	static Lecturer readFromFile();
+	void printToFile();
 };
 

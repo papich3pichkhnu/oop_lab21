@@ -3,15 +3,32 @@
 #include <fstream>
 #include <string>
 #include <time.h>
-void Lecturer::setName(string _name) { this->name = _name; }
-void Lecturer::setName(string _name, string _firstName, string _lastName) { this->name = _name; this->firstName = _firstName; this->lastName = _lastName; }
+Lecturer::Lecturer():lastName("Last name"),firstName("First name"),middleName("Middle name"),
+f(nullptr){
+	cout << "Lecturer \"" << this->getFullName() << "\" was created"<<endl;
+}
+Lecturer::~Lecturer()
+{
+	this->f = nullptr;
+	cout << "Lecturer \"" << this->getFullName() << "\" was deleted" << endl;	
+}
+Lecturer::Lecturer(string _lName, string _fName, string _mName):lastName(_lName),firstName(_fName),middleName(_mName)
+{
+	cout << "Lecturer \"" << this->getFullName() << "\" was destroyed" << endl;
+}
 void Lecturer::setFaculty(Faculty* _f)
 {
 	this->f = _f;
 }
 string Lecturer::getFirstName() { return this->firstName; }
-string Lecturer::getName() { return this->name; }
+string Lecturer::getMiddleName() { return this->middleName; }
 string Lecturer::getLastName() { return this->lastName; }
+string Lecturer::getFullName() {
+	return this->lastName + " " + this->firstName + " " + this->lastName;
+}
+void Lecturer::setName(string _name) { this->firstName = _name; }
+void Lecturer::setName(string _lName, string _fName, string _mName) { this->lastName = _lName; this->firstName = _fName; this->middleName = _mName; }
+
 void Lecturer::teaching()
 {
 	srand(time(NULL));
@@ -23,7 +40,7 @@ void Lecturer::teaching()
 	for (Student* st : students)
 	{
 		int mark = rand() % 5 + 1;
-		cout << "Student " << st->getFirstName() << " " << st->getName() << " " << st->getLastName() << " got mark " << mark << endl;
+		cout << "Student " << st->getFullName()<<" got mark " << mark << endl;
 		if (mark < 3)this->f->deductStudent(st);
 	}
 	cout << "/*************/" << endl;
@@ -31,4 +48,21 @@ void Lecturer::teaching()
 void Lecturer::addDiscipline(Discipline* d)
 {
 	this->disciplines.push_back(d);
+}
+void Lecturer::printToFile()
+{
+	ofstream out("lecturerfile.txt", ios::out);
+	out << this->lastName << endl;
+	out << this->firstName << endl;
+	out << this->middleName << endl;	
+	out.close();
+}
+Lecturer Lecturer::readFromFile()
+{
+	Lecturer obj;
+	ifstream in("lecturerfile.txt", ios::in);
+	in >> obj.lastName;
+	in >> obj.firstName;
+	in >> obj.middleName;	
+	return obj;
 }

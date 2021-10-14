@@ -5,16 +5,26 @@
 using namespace std;
 class Discipline
 {
-private:
+private:	
+	int credits;
+	int numberOfHours;
+	int numberOfControlWorks;
+public:
 	string name;
 	string cathedra;
 	string typeOfControl;
-	int credits;
-public:
-	Discipline(string _n, string _c, string _t, int _cr) :name(_n), cathedra(_c), typeOfControl(_t), credits(_cr) {}
+	Discipline(string _n, string _c, string _t, int _cr, int _nh, int _ncw);
+	Discipline();
+	~Discipline();
+	Discipline(const Discipline &_d);
 	string getName();
 	string getCathedra();
-	string getTypeOfControl();
+	string getTypeOfControl();	
 	int getCredits();
+	int getNumberOfHours();
+	int getNumberOfControlWorks();
+	void printToFile();
+	static Discipline readFromFile();
+	
 };
 

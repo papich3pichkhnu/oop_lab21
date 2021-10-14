@@ -3,22 +3,41 @@
 #include <fstream>
 #include <string>
 #include <time.h>
+int Student::count = 0;
+Student::Student():lastName("Last name"),firstName("First name"),middleName("Middle name"),
+age(18),height(170),colorOfEyes("Brown"),colorOfHair("Black"), sFaculty(nullptr)
+{
+	cout << "Student \"" << this->getFullName() << "\" was created";
+	++Student::count;
+}
+Student::~Student()
+{
+	cout << "Student \"" << this->getFullName() << "\" was destroyed";
+	this->sFaculty = nullptr;
+	++Student::count;
+}
+Student::Student(string _ln, string _fn, string _mn, int _a, int _h, string _coe, string _coh) :
+	lastName(_ln), firstName(_fn), middleName(_mn),
+	age(_a), height(_h), colorOfEyes(_coe), colorOfHair(_coh), sFaculty(nullptr)
+{
+	cout << "Student \"" << this->getFullName() << "\" was destroyed";	
+	++Student::count;
+}
 
-
-void Student::setName(string _name) { this->name = _name; }
-void Student::setName(string _name, string _firstName, string _lastName) { this->name = _name; this->firstName = _firstName; this->lastName = _lastName; }
+void Student::setName(string _name) { this->firstName = _name; }
+void Student::setName(string _lName, string _fName, string _mName) { this->lastName = _lName; this->firstName = _fName; this->middleName = _mName; }
 void Student::setData(int _age) { this->age = _age; }
 void Student::setData(int _age, int _height) { this->age = _age; this->height = _height; }
 void Student::setEyesHair(string _colorOfEyes, string _colorOfHair) { this->colorOfEyes = _colorOfEyes; this->colorOfHair = _colorOfHair; }
-void Student::modifyName(Student* s) { this->name = "St." + this->name; }
+void Student::modifyName(Student* s) { this->firstName = "St." + this->firstName; }
 void Student::setFaculty(Faculty* _sFaculty) { this->sFaculty = _sFaculty; }
 
 void Student::printToFile()
 {
 	ofstream out("studfile.txt", ios::out);
-	out << this->firstName<<endl;
-	out << this->name << endl;
-	out << this->lastName << endl;
+	out << this->lastName<<endl;
+	out << this->firstName << endl;
+	out << this->middleName << endl;
 	out << this->age << endl;
 	out << this->height << endl;
 	out << this->colorOfEyes << endl;
@@ -28,9 +47,9 @@ void Student::printToFile()
 void Student::show()
 {
 	cout << "Student ";
-	cout << "First name: "; cout << this->firstName << endl;
-	cout << "Name: "; cout << this->name << endl;
 	cout << "Last name: "; cout << this->lastName << endl;
+	cout << "First name: "; cout << this->firstName << endl;
+	cout << "Middle name: "; cout << this->middleName << endl;
 	cout << "Age: "; cout << this->age << " years" << endl;
 	cout << "Height: "; cout << this->height << " cm" << endl;
 	cout << "Color of eyes: ";  cout << this->colorOfEyes << endl;
@@ -57,8 +76,8 @@ Student* Student::generate() {
 	string firstName[] = { "John","Billy","Daniel" };
 	s->firstName = firstName[rand() % 3];
 	s->height = rand() % 50 + 110;
+	s->firstName = "None";
 	s->lastName = "None";
-	s->name = "None";
 	s->sFaculty = NULL;
 	return s;
 }
@@ -66,9 +85,9 @@ Student Student::readFromFile()
 {
 	Student obj;
 	ifstream in("studfile.txt", ios::in);
-	in >> obj.firstName;
-	in >> obj.name;
 	in >> obj.lastName;
+	in >> obj.firstName;
+	in >> obj.middleName;
 	in >> obj.age;
 	in >> obj.height;
 	in >> obj.colorOfEyes;
@@ -77,5 +96,11 @@ Student Student::readFromFile()
 	return obj;
 }
 string Student::getFirstName() { return this->firstName; }
-string Student::getName() { return this->name; }
+string Student::getMiddleName() { return this->middleName; }
 string Student::getLastName() { return this->lastName; }
+string Student::getFullName() { return this->lastName + " "+this->firstName + " " +this->lastName; }
+int Student::getAge() { return this->age; }
+void Student::speak(Student* another)
+{
+	cout << "Student " << this->getFullName() << " is speaking with student " << another->getFullName();
+}

@@ -2,6 +2,24 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+Faculty::Faculty() :facultyName("Faculty"), abbreviature("F"), decane("Decane"), yearOfCreating(2021),
+numOfCathedras(5), numOfSpecs(10), telephoneNumber("3802123456"), email("faculty@khnu.km.ua")
+{
+	this->createDisciplines();
+	cout << "Faculty \"" << this->facultyName << "\" was created";
+}
+Faculty::~Faculty()
+{
+	this->createDisciplines();
+	cout << "Faculty \"" << this->facultyName << "\" was destroyed";
+}
+Faculty::Faculty(string _fName, string _a, string _d, int _yc, int _nc, int _ns, string _tn, string _e) :
+	facultyName(_fName), abbreviature(_a), decane(_d), yearOfCreating(_yc),
+	numOfCathedras(_nc), numOfSpecs(_ns), telephoneNumber(_tn), email(_e)
+{
+	this->createDisciplines();
+	cout << "Faculty \"" << this->facultyName << "\" was created";
+}
 void Faculty::setFaculty(string _facultyName) { this->facultyName = _facultyName; }
 void Faculty::setFaculty(string _facultyName, string _abbreviature) { this->facultyName = _facultyName; this->abbreviature = _abbreviature; }
 void Faculty::setNumericData(int _numOfCathedras) { this->numOfCathedras = _numOfCathedras; }
@@ -63,7 +81,7 @@ void Faculty::enrollStudent(Student* s)
 {
 	this->students.push_back(s);
 	s->setFaculty(this);
-	cout << "Student " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was enroled on the faculty " << this->abbreviature<<endl;
+	cout << "Student " << s->getFullName()<< " was enroled on the faculty " << this->abbreviature<<endl;
 
 }
 void Faculty::deductStudent(Student* s)
@@ -71,10 +89,10 @@ void Faculty::deductStudent(Student* s)
 	bool f = false;
 	for (auto it=this->students.begin();it!=this->students.end();it++)
 	{
-		if (s->getFirstName() == (*it)->getFirstName() && s->getName() == (*it)->getName() && s->getLastName() == (*it)->getLastName())
+		if (s->getFullName() == (*it)->getFullName())
 		{
 			this->students.erase(it);
-			cout << "Student " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was deducted from the faculty " << this->abbreviature << endl;
+			cout << "Student " << s->getFullName()<<" was deducted from the faculty " << this->abbreviature << endl;
 			f = true;
 			s->setFaculty(NULL);
 			break;
@@ -82,14 +100,18 @@ void Faculty::deductStudent(Student* s)
 	}
 	if (!f)
 	{
-		cout << "Student " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " isn't studiyng on this faculty " << this->abbreviature << endl;
+		cout << "Student " << s->getFullName() << " isn't studiyng on this faculty " << this->abbreviature << endl;
 	}
 }
 void Faculty::enrollLecturer(Lecturer* s)
 {
 	this->lecturers.push_back(s);
 	s->setFaculty(this);
-	cout << "Lecturer " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was enroled on the faculty " << this->abbreviature << endl;
+	for (Discipline* d : this->disciplines)
+	{
+		if (rand() % 2 == 1)s->addDiscipline(d);
+	}
+	cout << "Lecturer " << s->getFullName() << " was enroled on the faculty " << this->abbreviature << endl;
 
 }
 void Faculty::deductLecturer(Lecturer* s)
@@ -97,10 +119,10 @@ void Faculty::deductLecturer(Lecturer* s)
 	bool f = false;
 	for (auto it = this->lecturers.begin(); it != this->lecturers.end(); it++)
 	{
-		if (s->getFirstName() == (*it)->getFirstName() && s->getName() == (*it)->getName() && s->getLastName() == (*it)->getLastName())
+		if (s->getFullName() == (*it)->getFullName())
 		{
 			this->lecturers.erase(it);
-			cout << "Lecturer " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " was deducted from the faculty " << this->abbreviature << endl;
+			cout << "Lecturer " << s->getFullName() << " was deducted from the faculty " << this->abbreviature << endl;
 			f = true;
 			s->setFaculty(NULL);
 			break;
@@ -108,7 +130,21 @@ void Faculty::deductLecturer(Lecturer* s)
 	}
 	if (!f)
 	{
-		cout << "Lecturer " << s->getFirstName() << " " << s->getName() << " " << s->getLastName() << " isn't teaching on this faculty " << this->abbreviature << endl;
+		cout << "Lecturer " << s->getFullName() << " isn't teaching on this faculty " << this->abbreviature << endl;
 	}
 }
+Student* findStudent(string _ln, string _fn, string _mn)
+{
+	return nullptr;
+}
 vector<Student*> Faculty::getStudents() { return this->students; }
+vector<Discipline*> Faculty::getDisciplines() { return this->disciplines; }
+void Faculty::createDisciplines()
+{
+	int n = 5;
+	for (int i = 1; i <= 5; i++)
+	{
+		Discipline* d = new Discipline("Discipline" + std::to_string(i), "Cathedra", "Exam", 10, 10, 10);
+		this->disciplines.push_back(d);
+	}
+}
