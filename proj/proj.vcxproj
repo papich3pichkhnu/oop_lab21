@@ -139,14 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Department.cpp" />
     <ClCompile Include="Discipline.cpp" />
+    <ClCompile Include="Exam.cpp" />
     <ClCompile Include="Faculty.cpp" />
     <ClCompile Include="Lecturer.cpp" />
     <ClCompile Include="proj.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Department.h" />
     <ClInclude Include="Discipline.h" />
+    <ClInclude Include="Exam.h" />
     <ClInclude Include="Faculty.h" />
     <ClInclude Include="Lecturer.h" />
     <ClInclude Include="Student.h" />

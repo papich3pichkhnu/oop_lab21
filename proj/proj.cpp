@@ -1,6 +1,9 @@
 #include <iostream>
 #include "Faculty.h"
 #include "Student.h"
+#include "Department.h"
+#include "Lecturer.h"
+#include "Exam.h"
 #include <time.h>
 using namespace std;
 //task 11
@@ -189,113 +192,120 @@ int main()
 
  lecturer->teaching();*/
 #pragma endregion
+#pragma region lab3
 
- //task 14
- //простий
-	Student a("Test", "Test", "Test", 18, 190, "Blue", "White");
-	//явний
-	Student b = Student();
-	//скорочений
-	Student c;
+ ////task 14
+ ////простий
+	//Student a("Test", "Test", "Test", 18, 190, "Blue", "White");
+	////явний
+	//Student b = Student();
+	////скорочений
+	//Student c;
 
-	//task 11-13
-	showSquaredAge(a);
-	showSquaredAge(&a);
-	Student test = createStudent();
-	test.show();
+	////task 11-13
+	//showSquaredAge(a);
+	//showSquaredAge(&a);
+	//Student test = createStudent();
+	//test.show();
 
-	//task 15-17
-	Student* pStudent = new Student();
+	////task 15-17
+	//Student* pStudent = new Student();
 
 
-	Faculty faculty1, faculty2, faculty3, faculty4, faculty5;
-	Student* dynamicStudent1 = new Student();
-	Student* dynamicStudent2 = new Student();
-	Student* dynamicStudent3 = new Student();
-	Student* dynamicStudent4 = new Student();
-	Student* dynamicStudent5 = new Student();
-	
-	Faculty arrayFaculties[5] = { faculty1,faculty2,faculty3,faculty4,faculty5 };
-	Student* dynamicArrayStudents[5];
-	dynamicArrayStudents[0] = dynamicStudent1;
-	dynamicArrayStudents[1] = dynamicStudent2;
-	dynamicArrayStudents[2] = dynamicStudent3;
-	dynamicArrayStudents[3] = dynamicStudent4;
-	dynamicArrayStudents[4] = dynamicStudent5;
+	//Faculty faculty1, faculty2, faculty3, faculty4, faculty5;
+	//Student* dynamicStudent1 = new Student();
+	//Student* dynamicStudent2 = new Student();
+	//Student* dynamicStudent3 = new Student();
+	//Student* dynamicStudent4 = new Student();
+	//Student* dynamicStudent5 = new Student();
+	//
+	//Faculty arrayFaculties[5] = { faculty1,faculty2,faculty3,faculty4,faculty5 };
+	//Student* dynamicArrayStudents[5];
+	//dynamicArrayStudents[0] = dynamicStudent1;
+	//dynamicArrayStudents[1] = dynamicStudent2;
+	//dynamicArrayStudents[2] = dynamicStudent3;
+	//dynamicArrayStudents[3] = dynamicStudent4;
+	//dynamicArrayStudents[4] = dynamicStudent5;
 
-	
-	cout << "Faculties" << endl;
-	for (int i = 0; i < 5; i++)
-	{
-		char n = (char)(int('0') + i + 1);
-		string sn = ""; sn += n;
-		arrayFaculties[i].setFaculty("faculty" + sn, "FC" + sn);
-		arrayFaculties[i].setInfo("decane" + sn, rand() % 20 + 2000, "123456789", "fac" + sn + "@gmail.com");
-		arrayFaculties[i].setNumericData(rand() % 5 + 10, rand() % 5 + 10);
-		arrayFaculties[i].modifyData(&arrayFaculties[i]);
-		arrayFaculties[i] = arrayFaculties[i].returnWithModifiedData();
-		cout << "Faculty " << i + 1 << ":" << endl;
-		arrayFaculties[i].show();
-	}
-	
-	Faculty fileFaculty;
-	arrayFaculties[0].printToFile();
-	fileFaculty = Faculty::readFromFile();
-	cout << "/********************/" << endl;
-	cout << "Faculty written and read from file:" << endl;
-	fileFaculty.show();
-	cout << endl;
-	cout << "/********************/" << endl;
-	cout << "Students" << endl;
-	for (int i = 0; i < 5; i++)
-	{
-		cout << "Student " << i + 1 << endl;
-		if (i % 2 == 0) {
-			char n = (char)(int('0') + i + 1);
-			string sn = ""; sn += n;
-			dynamicArrayStudents[i]->setName("Name" + sn, "FirstName" + sn, "LastName" + sn);
-			dynamicArrayStudents[i]->setEyesHair("brown", "blonde");
-			dynamicArrayStudents[i]->setData(18, 170);
-			dynamicArrayStudents[i]->setFaculty(&arrayFaculties[i]);
-			dynamicArrayStudents[i]->modifyName(dynamicArrayStudents[i]);
-		}
-		else {
-			dynamicArrayStudents[i] = Student::generate();
-		}
-		dynamicArrayStudents[i]->show();
-	}
-	Student fileStudent;
-	dynamicArrayStudents[0]->printToFile();
-	fileStudent = Student::readFromFile();
-	cout << "/********************/" << endl;
-	cout << "Student written and read from file:" << endl;
-	fileStudent.show();
-	cout << endl;
-	cout << "/********************/" << endl;
-	cout << endl;
+	//
+	//cout << "Faculties" << endl;
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	char n = (char)(int('0') + i + 1);
+	//	string sn = ""; sn += n;
+	//	arrayFaculties[i].setFaculty("faculty" + sn, "FC" + sn);
+	//	arrayFaculties[i].setInfo("decane" + sn, rand() % 20 + 2000, "123456789", "fac" + sn + "@gmail.com");
+	//	arrayFaculties[i].setNumericData(rand() % 5 + 10);
+	//	arrayFaculties[i].modifyData(&arrayFaculties[i]);
+	//	arrayFaculties[i] = arrayFaculties[i].returnWithModifiedData();
+	//	cout << "Faculty " << i + 1 << ":" << endl;
+	//	arrayFaculties[i].show();
+	//}
+	//
+	//Faculty fileFaculty;
+	//arrayFaculties[0].printToFile();
+	//fileFaculty = Faculty::readFromFile();
+	//cout << "/********************/" << endl;
+	//cout << "Faculty written and read from file:" << endl;
+	//fileFaculty.show();
+	//cout << endl;
+	//cout << "/********************/" << endl;
+	//cout << "Students" << endl;
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	cout << "Student " << i + 1 << endl;
+	//	if (i % 2 == 0) {
+	//		char n = (char)(int('0') + i + 1);
+	//		string sn = ""; sn += n;
+	//		dynamicArrayStudents[i]->setName("Name" + sn, "FirstName" + sn, "LastName" + sn);
+	//		dynamicArrayStudents[i]->setEyesHair("brown", "blonde");
+	//		dynamicArrayStudents[i]->setData(18, 170);
+	//		dynamicArrayStudents[i]->setFaculty(&arrayFaculties[i]);
+	//		dynamicArrayStudents[i]->modifyName(dynamicArrayStudents[i]);
+	//	}
+	//	else {
+	//		dynamicArrayStudents[i] = Student::generate();
+	//	}
+	//	dynamicArrayStudents[i]->show();
+	//}
+	//Student fileStudent;
+	//dynamicArrayStudents[0]->printToFile();
+	//fileStudent = Student::readFromFile();
+	//cout << "/********************/" << endl;
+	//cout << "Student written and read from file:" << endl;
+	//fileStudent.show();
+	//cout << endl;
+	//cout << "/********************/" << endl;
+	//cout << endl;
+#pragma endregion
 
 	//task 18-21	
-	Faculty* fit = new Faculty("Faculty of information techologies", "FIT", "Savenko O.S.", 2000, 5, 10, "tel", "email");
+	Faculty* FIT = new Faculty("Faculty of information techologies", "FIT", "Savenko O.S.", 2000, 5, 10, "tel", "email");
 	
-	Student* student1 = new Student("Avsiievych", "Volodymyr", "Ruslanovych", 18, 174, "Green", "Black");
-	Student* student2 = new Student("Avsiievych", "Ruslan", "Volodymyrovych", 18, 174, "Green", "Black");
+	Department* KIIS = new Department("KIIS");
+	Department* KN = new Department("KN");
+
+	FIT->addDepartment(KIIS);
+	FIT->addDepartment(KN);
+
+	Student* AVR = new Student("Avsiievych", "Volodymyr", "Ruslanovych", 18, 174, "Green", "Black");
+	Student* ARV = new Student("Avsiievych", "Ruslan", "Volodymyrovych", 18, 174, "Green", "Black");
 	
-	fit->enrollStudent(student1);
-	fit->enrollStudent(student2);	
+	FIT->enrollStudent(AVR);
+	FIT->enrollStudent(ARV);
 
-	Discipline* discipline1 = new Discipline("OOP", "KI", "Exam", 10, 20, 5);
-	Discipline* discipline2 = new Discipline("CL", "KI", "Course_Project", 10, 20, 5);
-	Discipline* discipline3 = new Discipline("SDA", "KI", "Exam", 10, 20, 5);
+	Discipline* OOP = new Discipline("OOP", "KI", "Exam", 10, 20, 5);
+	Discipline* CL = new Discipline("CL", "KI", "Course_Project", 10, 20, 5);
+	Discipline* SDA = new Discipline("SDA", "KI", "Exam", 10, 20, 5);
 
-	Lecturer* lecturer = new Lecturer("Lysenko", "Sergiy", "Mykolayovych");	
-	lecturer->addDiscipline(discipline1);
-	lecturer->addDiscipline(discipline2);
-	lecturer->addDiscipline(discipline3);
+	Lecturer* LSM = new Lecturer("Lysenko", "Sergiy", "Mykolayovych");		
+	Lecturer* POO = new Lecturer("Pavlova", "Olga", "Oleksandrivna");		
 
-	fit->enrollLecturer(lecturer);
+	KIIS->enrollLecturer(LSM);
+	KN->enrollLecturer(POO);
 
-	lecturer->teaching();
-	//association - faculty use students
-	//aggregation - lecturer has a list of disciplines
-	//composition - faculty has a list of created disciplines
+	Exam* eOOP = new Exam(FIT, KIIS, AVR, LSM, OOP);
+	eOOP->takeExam("15.10.2021");
+	
+	//Клас іспит(асоціація) 
 }

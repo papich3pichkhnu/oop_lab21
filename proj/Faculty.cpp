@@ -4,35 +4,33 @@
 #include <string>
 int Faculty::count = 0;
 Faculty::Faculty() :facultyName("Faculty"+std::to_string(this->count+1)), abbreviature("F"), decane("Decane"), yearOfCreating(2021),
-numOfCathedras(5), numOfSpecs(10), telephoneNumber("3802123456"), email("faculty@khnu.km.ua")
+ numOfSpecs(10), telephoneNumber("3802123456"), email("faculty@khnu.km.ua")
 {
-	this->createDisciplines();
+	
 	cout << "Faculty \"" << this->facultyName << "\" was created" <<endl;
 }
 Faculty::~Faculty()
 {	
 	this->students.clear();
-	this->lecturers.clear();
-	this->disciplines.clear();
+	
 	cout << "Faculty \"" << this->facultyName << "\" was destroyed"<<endl;
 }
 Faculty::Faculty(string _fName, string _a, string _d, int _yc, int _nc, int _ns, string _tn, string _e) :
 	facultyName(_fName), abbreviature(_a), decane(_d), yearOfCreating(_yc),
-	numOfCathedras(_nc), numOfSpecs(_ns), telephoneNumber(_tn), email(_e)
+	numOfSpecs(_ns), telephoneNumber(_tn), email(_e)
 {
-	this->createDisciplines();
+	
 	cout << "Faculty \"" << this->facultyName << "\" was created"<<endl;
 }
 void Faculty::setFaculty(string _facultyName) { this->facultyName = _facultyName; }
 void Faculty::setFaculty(string _facultyName, string _abbreviature) { this->facultyName = _facultyName; this->abbreviature = _abbreviature; }
-void Faculty::setNumericData(int _numOfCathedras) { this->numOfCathedras = _numOfCathedras; }
-void Faculty::setNumericData(int _numOfCathedras, int _numOfSpecs) { this->numOfCathedras = _numOfCathedras; this->numOfSpecs = _numOfSpecs; }
+void Faculty::setNumericData(int _numOfSpecs) { this->numOfSpecs = _numOfSpecs; }
 void Faculty::setInfo(string _decane, int _yearOfCreating, string _telephoneNumber, string _email) {
 	this->decane = _decane; this->yearOfCreating = _yearOfCreating; this->telephoneNumber = _telephoneNumber;
 	this->email = _email;
 }
-int Faculty::getNumOfCathedras() {
-	return this->numOfCathedras;
+int Faculty::getNumOfDepartments() {
+	return this->departments.size();
 }
 void Faculty::modifyData(Faculty* faculty) { faculty->abbreviature += "_New"; }
 Faculty Faculty::returnWithModifiedData() { this->abbreviature += "New"; return *this; }
@@ -42,7 +40,6 @@ void Faculty::printToFile() {
 	out << this->decane << endl;
 	out << this->email << endl;
 	out << this->facultyName << endl;
-	out << this->numOfCathedras << endl;
 	out << this->numOfSpecs << endl;
 	out << this->telephoneNumber << endl;
 	out << this->yearOfCreating << endl;
@@ -54,7 +51,6 @@ void Faculty::show() {
 	cout << "Decane: ";cout << this->decane << endl;
 	cout << "Email: ";cout << this->email << endl;
 	cout << "Faculty name: ";cout << this->facultyName << endl;
-	cout << "Num of cathedras: ";cout << this->numOfCathedras << endl;
 	cout << "Num of majors: ";cout << this->numOfSpecs << endl;
 	cout << "Telephone number: ";cout << this->telephoneNumber << endl;
 	cout << "Year of creating: ";cout << this->yearOfCreating << endl;
@@ -67,7 +63,6 @@ Faculty Faculty::readFromFile() {
 	in >> obj.decane;
 	in >> obj.email;
 	in >> obj.facultyName;
-	in >> obj.numOfCathedras;
 	in >> obj.numOfSpecs;
 	in >> obj.telephoneNumber;
 	in >> obj.yearOfCreating;
@@ -106,26 +101,23 @@ void Faculty::deductStudent(Student* s)
 		cout << "Student " << s->getFullName() << " isn't studiyng on this faculty " << this->abbreviature << endl;
 	}
 }
-void Faculty::enrollLecturer(Lecturer* s)
-{
-	this->lecturers.push_back(s);
-	s->setFaculty(this);
-	for (Discipline* d : this->disciplines)
-	{
-		if (rand() % 2 == 1)s->addDiscipline(d);
-	}
-	cout << "Lecturer " << s->getFullName() << " was enroled on the faculty " << this->abbreviature << endl;
 
+void Faculty::addDepartment(Department* s)
+{
+	this->departments.push_back(s);
+	s->setFaculty(this);
+	cout << "Department " << s->name << " was added in list of departments of the faculty " << this->abbreviature << endl;
 }
-void Faculty::deductLecturer(Lecturer* s)
+
+void Faculty::deleteDepartment(Department* s)
 {
 	bool f = false;
-	for (auto it = this->lecturers.begin(); it != this->lecturers.end(); it++)
+	for (auto it = this->departments.begin(); it != this->departments.end(); it++)
 	{
-		if (s->getFullName() == (*it)->getFullName())
+		if (s->name == (*it)->name)
 		{
-			this->lecturers.erase(it);
-			cout << "Lecturer " << s->getFullName() << " was deducted from the faculty " << this->abbreviature << endl;
+			this->departments.erase(it);
+			cout << "Department " << s->name << " was deleted from the faculty " << this->abbreviature << endl;
 			f = true;
 			s->setFaculty(NULL);
 			break;
@@ -133,15 +125,16 @@ void Faculty::deductLecturer(Lecturer* s)
 	}
 	if (!f)
 	{
-		cout << "Lecturer " << s->getFullName() << " isn't teaching on this faculty " << this->abbreviature << endl;
+		cout << "Department " << s->name << " isn't in list of departments on this faculty " << this->abbreviature << endl;
 	}
 }
+
 Student* findStudent(string _ln, string _fn, string _mn)
 {
 	return nullptr;
 }
 vector<Student*> Faculty::getStudents() { return (this->students); }
-vector<Discipline*> Faculty::getDisciplines() { return (this->disciplines); }
+/*vector<Discipline*> Faculty::getDisciplines() { return (this->disciplines); }
 void Faculty::createDisciplines()
 {
 	int n = 5;
@@ -150,4 +143,4 @@ void Faculty::createDisciplines()
 		Discipline* d = new Discipline(this->facultyName+"_Discipline" + std::to_string(i), "Cathedra", "Exam", 10, 10, 10);
 		this->disciplines.push_back(d);
 	}
-}
+}*/

@@ -4,12 +4,12 @@
 #include <string>
 #include <time.h>
 Lecturer::Lecturer():lastName("Last name"),firstName("First name"),middleName("Middle name"),
-f(nullptr){
+d(nullptr){
 	cout << "Lecturer \"" << this->getFullName() << "\" was created"<<endl;
 }
 Lecturer::~Lecturer()
 {
-	this->f = nullptr;
+	this->d = nullptr;
 	
 	cout << "Lecturer \"" << this->getFullName() << "\" was destroyed" << endl;	
 }
@@ -17,26 +17,28 @@ Lecturer::Lecturer(string _lName, string _fName, string _mName):lastName(_lName)
 {
 	cout << "Lecturer \"" << this->getFullName() << "\" was created" << endl;
 }
-void Lecturer::setFaculty(Faculty* _f)
-{
-	this->f = _f;
-}
+
 string Lecturer::getFirstName() { return this->firstName; }
 string Lecturer::getMiddleName() { return this->middleName; }
 string Lecturer::getLastName() { return this->lastName; }
 string Lecturer::getFullName() {
-	return this->lastName + " " + this->firstName + " " + this->lastName;
+	return this->lastName + " " + this->firstName + " " + this->middleName;
 }
 void Lecturer::setName(string _name) { this->firstName = _name; }
 void Lecturer::setName(string _lName, string _fName, string _mName) { this->lastName = _lName; this->firstName = _fName; this->middleName = _mName; }
 
-void Lecturer::teaching()
+void Lecturer::setDepartment(Department* d)
+{
+	this->d = d;
+}
+
+/*void Lecturer::teaching()
 {
 	srand(time(NULL));
 	vector<Student*> students=this->f->getStudents();
 	int cnt = this->disciplines.size();	
 	int r = rand() % cnt;
-	cout << "/*************/" << endl;
+	cout << "" << endl;
 	cout << "Teaching discipline " << this->disciplines[r]->getName() << "...." << endl;
 	for (Student* st : students)
 	{
@@ -44,12 +46,12 @@ void Lecturer::teaching()
 		cout << "Student " << st->getFullName()<<" got mark " << mark << endl;
 		if (mark < 3)this->f->deductStudent(st);
 	}
-	cout << "/*************/" << endl;
+	cout << "" << endl;
 }
 void Lecturer::addDiscipline(Discipline* d)
 {
 	this->disciplines.push_back(d);
-}
+}*/
 void Lecturer::printToFile()
 {
 	ofstream out("lecturerfile.txt", ios::out);
