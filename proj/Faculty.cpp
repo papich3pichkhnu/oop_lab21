@@ -2,23 +2,26 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-Faculty::Faculty() :facultyName("Faculty"), abbreviature("F"), decane("Decane"), yearOfCreating(2021),
+int Faculty::count = 0;
+Faculty::Faculty() :facultyName("Faculty"+std::to_string(this->count+1)), abbreviature("F"), decane("Decane"), yearOfCreating(2021),
 numOfCathedras(5), numOfSpecs(10), telephoneNumber("3802123456"), email("faculty@khnu.km.ua")
 {
 	this->createDisciplines();
-	cout << "Faculty \"" << this->facultyName << "\" was created";
+	cout << "Faculty \"" << this->facultyName << "\" was created" <<endl;
 }
 Faculty::~Faculty()
-{
-	this->createDisciplines();
-	cout << "Faculty \"" << this->facultyName << "\" was destroyed";
+{	
+	this->students.clear();
+	this->lecturers.clear();
+	this->disciplines.clear();
+	cout << "Faculty \"" << this->facultyName << "\" was destroyed"<<endl;
 }
 Faculty::Faculty(string _fName, string _a, string _d, int _yc, int _nc, int _ns, string _tn, string _e) :
 	facultyName(_fName), abbreviature(_a), decane(_d), yearOfCreating(_yc),
 	numOfCathedras(_nc), numOfSpecs(_ns), telephoneNumber(_tn), email(_e)
 {
 	this->createDisciplines();
-	cout << "Faculty \"" << this->facultyName << "\" was created";
+	cout << "Faculty \"" << this->facultyName << "\" was created"<<endl;
 }
 void Faculty::setFaculty(string _facultyName) { this->facultyName = _facultyName; }
 void Faculty::setFaculty(string _facultyName, string _abbreviature) { this->facultyName = _facultyName; this->abbreviature = _abbreviature; }
@@ -137,14 +140,14 @@ Student* findStudent(string _ln, string _fn, string _mn)
 {
 	return nullptr;
 }
-vector<Student*> Faculty::getStudents() { return this->students; }
-vector<Discipline*> Faculty::getDisciplines() { return this->disciplines; }
+vector<Student*> Faculty::getStudents() { return (this->students); }
+vector<Discipline*> Faculty::getDisciplines() { return (this->disciplines); }
 void Faculty::createDisciplines()
 {
 	int n = 5;
 	for (int i = 1; i <= 5; i++)
 	{
-		Discipline* d = new Discipline("Discipline" + std::to_string(i), "Cathedra", "Exam", 10, 10, 10);
+		Discipline* d = new Discipline(this->facultyName+"_Discipline" + std::to_string(i), "Cathedra", "Exam", 10, 10, 10);
 		this->disciplines.push_back(d);
 	}
 }

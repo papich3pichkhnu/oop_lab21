@@ -4,13 +4,13 @@
 #include <time.h>
 using namespace std;
 //task 11
-int showSquaredAge(Student s)
+void showSquaredAge(Student s)
 {
 	cout << "Squared age of student \"" << s.getFullName() << "\": ";
 	cout << (s.getAge()) * (s.getAge()) << endl;
 }
 //task 12
-int showSquaredAge(Student* s)
+void showSquaredAge(Student* s)
 {
 	cout << "Squared age of student \"" << s->getFullName() << "\": ";
 	cout << (s->getAge()) * (s->getAge()) << endl;
@@ -198,6 +198,12 @@ int main()
 	//скорочений
 	Student c;
 
+	//task 11-13
+	showSquaredAge(a);
+	showSquaredAge(&a);
+	Student test = createStudent();
+	test.show();
+
 	//task 15-17
 	Student* pStudent = new Student();
 
@@ -208,7 +214,7 @@ int main()
 	Student* dynamicStudent3 = new Student();
 	Student* dynamicStudent4 = new Student();
 	Student* dynamicStudent5 = new Student();
-
+	
 	Faculty arrayFaculties[5] = { faculty1,faculty2,faculty3,faculty4,faculty5 };
 	Student* dynamicArrayStudents[5];
 	dynamicArrayStudents[0] = dynamicStudent1;
@@ -217,6 +223,7 @@ int main()
 	dynamicArrayStudents[3] = dynamicStudent4;
 	dynamicArrayStudents[4] = dynamicStudent5;
 
+	
 	cout << "Faculties" << endl;
 	for (int i = 0; i < 5; i++)
 	{
@@ -230,6 +237,7 @@ int main()
 		cout << "Faculty " << i + 1 << ":" << endl;
 		arrayFaculties[i].show();
 	}
+	
 	Faculty fileFaculty;
 	arrayFaculties[0].printToFile();
 	fileFaculty = Faculty::readFromFile();

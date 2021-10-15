@@ -7,12 +7,12 @@ int Student::count = 0;
 Student::Student():lastName("Last name"),firstName("First name"),middleName("Middle name"),
 age(18),height(170),colorOfEyes("Brown"),colorOfHair("Black"), sFaculty(nullptr)
 {
-	cout << "Student \"" << this->getFullName() << "\" was created";
+	cout << "Student \"" << this->getFullName() << "\" was created"<<endl;
 	++Student::count;
 }
 Student::~Student()
 {
-	cout << "Student \"" << this->getFullName() << "\" was destroyed";
+	cout << "Student \"" << this->getFullName() << "\" was destroyed"<<endl;
 	this->sFaculty = nullptr;
 	++Student::count;
 }
@@ -20,7 +20,8 @@ Student::Student(string _ln, string _fn, string _mn, int _a, int _h, string _coe
 	lastName(_ln), firstName(_fn), middleName(_mn),
 	age(_a), height(_h), colorOfEyes(_coe), colorOfHair(_coh), sFaculty(nullptr)
 {
-	cout << "Student \"" << this->getFullName() << "\" was destroyed";	
+
+	cout << "Student \"" << this->getFullName() << "\" was created"<<endl;	
 	++Student::count;
 }
 
@@ -98,7 +99,7 @@ Student Student::readFromFile()
 string Student::getFirstName() { return this->firstName; }
 string Student::getMiddleName() { return this->middleName; }
 string Student::getLastName() { return this->lastName; }
-string Student::getFullName() { return this->lastName + " "+this->firstName + " " +this->lastName; }
+string Student::getFullName() { return this->lastName + " "+this->firstName + " " +this->middleName; }
 int Student::getAge() { return this->age; }
 void Student::speak(Student* another)
 {

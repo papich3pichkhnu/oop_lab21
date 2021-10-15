@@ -21,6 +21,7 @@ private:
 	vector<Student*> students;
 	vector<Lecturer*> lecturers;
 	vector<Discipline*> disciplines;
+	static int count;
 public:
 	string facultyName;
 	string abbreviature;

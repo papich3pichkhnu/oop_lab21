@@ -10,11 +10,12 @@ f(nullptr){
 Lecturer::~Lecturer()
 {
 	this->f = nullptr;
-	cout << "Lecturer \"" << this->getFullName() << "\" was deleted" << endl;	
+	
+	cout << "Lecturer \"" << this->getFullName() << "\" was destroyed" << endl;	
 }
 Lecturer::Lecturer(string _lName, string _fName, string _mName):lastName(_lName),firstName(_fName),middleName(_mName)
 {
-	cout << "Lecturer \"" << this->getFullName() << "\" was destroyed" << endl;
+	cout << "Lecturer \"" << this->getFullName() << "\" was created" << endl;
 }
 void Lecturer::setFaculty(Faculty* _f)
 {
